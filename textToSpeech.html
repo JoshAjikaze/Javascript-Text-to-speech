@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text To Speech</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Noto-sans, sans-serif;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #5256ad;
+      }
+
+      .wrapper {
+        width: 370px;
+        border-radius: 7px;
+        padding: 25px 30px;
+        background: #fff;
+      }
+
+      .wrapper header {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 500;
+      }
+
+      .wrapper form {
+        margin: 35px 0 20px;
+      }
+      form .row {
+        display: flex;
+        margin-bottom: 20px;
+        flex-direction: column;
+      }
+
+      form .row label {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      form :where(textarea, select, button) {
+        outline: none;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+      }
+
+      form .row textarea {
+        resize: none;
+        height: 110px;
+        font-size: 15px;
+        padding: 8px 10px;
+        border: 1px solid #999;
+      }
+
+      form .row .outer {
+        height: 47px;
+        display: flex;
+        padding: 0 10px;
+        align-items: center;
+        border-radius: 5px;
+        border: 1px solid #999;
+      }
+
+      form .row select {
+        font-size: 14px;
+        background-color: transparent;
+      }
+
+      form button {
+        height: 52px;
+        margin-top: 10px;
+        color: #fff;
+        font-size: 17px;
+        cursor: pointer;
+        background: #5256ad;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>Text To Speech</header>
+      <form action="#">
+        <div class="row">
+          <label>Enter Text</label>
+          <textarea></textarea>
+        </div>
+        <div class="row">
+          <label>Select Voice</label>
+          <div class="outer">
+            <select>
+              <option value="">Google Voice (hi-IN)</option>
+              <option value="">Google Voice Deutsch (de-DE)</option>
+              <option value="">Google Voice English (en-US)</option>
+              <option value="">Google Voice English Male (en-GB)</option>
+              <option value="">Google Voice English Female (en-GB)</option>
+            </select>
+          </div>
+        </div>
+        <button>Convert To Speech</button>
+      </form>
+    </div>
+
+    <div id="arrayContainer"></div>
+
+    <script>
+      const textarea = document.querySelector("textarea"),
+        speechBtn = document.querySelector("button");
+
+      console.log(speechBtn);
+
+      function textToSpeech(text) {
+        let utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance); //speaks out loud
+      }
+
+      speechBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (textarea.value !== "") {
+          textToSpeech(textarea.value);
+        } else {
+          textToSpeech("empty");
+        }
+
+        textarea.value = "";
+      });
+    </script>
+
+    <script>
+      let arrrayContainer = document.querySelector("#arrayContainer");
+      console.log(arrrayContainer);
+      const array = ["arr1", "arr2", "arr3"];
+      array.push("New Element")
+      for(i = 0; i < array.length; i++){
+        let temp = `<p>${array[i]} <button>Done</buton> <button>del</button></p>`;
+        arrrayContainer.innerHTML += temp
+      }
+
+    </script>
+  </body>
+</html>
